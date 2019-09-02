@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 
+
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <!-- 插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.LombokPlugin">
@@ -12,14 +13,22 @@
             <property name="@NoArgsConstructor" value="true"/>
         </plugin>
 
+        <!-- 自定义注释插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.CommentPlugin">
+            <!-- 自定义模板路径 -->
+            <property name="template" value="src/main/resources/mybatis-generator-comment.ftl" />
+        </plugin>
+
         <!--覆盖生成XML文件-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
         <!--&lt;!&ndash; 自定义注释生成器 &ndash;&gt;-->
-        <!--<commentGenerator type="com.zto.starunion.tools.mybatis.MysqlCommentGenerator">-->
+        <!--<commentGenerator type="com.destinym.dubbotools.mybatis.MysqlCommentGenerator">-->
             <!--<property name="author" value="system "/>-->
             <!--<property name="suppressDate" value="true"/>-->
         <!--</commentGenerator>-->
+
+
 
 
         <!--数据库链接URL，用户名、密码 -->
@@ -28,9 +37,6 @@
                         userId="root" >
         </jdbcConnection>
 
-        <!--<javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">-->
-            <!--<property name="forceBigDecimals" value="false"/>-->
-        <!--</javaTypeResolver>-->
 
         <!-- 生成模型的包名和位置-->
         <javaModelGenerator targetPackage="com.destinym.dubbotools.dal.model" targetProject="./src/main/java">
